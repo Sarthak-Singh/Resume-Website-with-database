@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en" id="home">
+<head>
+    <title>Sarthak Singh</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'resume/images/logo.PNG' %}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'resume/css/Style.css' %}">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coda">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="90">
+
+    <!-- Navigation Bar -->
+    <div class="navbar navbar-fixed-top" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                    <i class="glyphicon glyphicon-menu-hamburger" id="nav-tog"></i>
+                </button>
+                <a id="logo" href="#home" class="col-sm-offset-0 col-xs-offset-1">Sarthak</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-right" id="mainNavBar">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link pg" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link pg" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link pg" href="#training">Training</a></li>
+                    <li class="nav-item"><a class="nav-link pg" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link pg" href="#hobbies">Extra Cirriculars</a></li>
+                    <li class="nav-item"><a class="nav-link pg" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home -->
+    <section>
+        <img src="{% static 'resume/images/Cover Background.png' %}" id="home-background">
+        <div class="content-home">
+            <h3 style="font-weight: bold; opacity: 90%;">Welcome</h3>
+            <h1 id="iam">I'M
+                <span id="flash-text">Sarthak Singh.</span></h1>
+            <h5>An electrical and electronics engineering graduate, looking forward</h5>
+            <h5>to work in the software development industry.</h5>
+            <a href="https://drive.google.com/uc?export=download&id=15Cy4NEjFstXz9VjQsN5Ox6x6mmG8-WL_">
+                <button class="bt bt-primary" id="upload_cv">DOWNLOAD CV</button>
+            </a><br>
+            <a href="#about"><i class="fa fa-angle-up" id="scroll"></i></a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="bg-gray" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <img src="{{ about.profile_pic.url }}" class="media-object">
+                </div>
+                <div class="col-md-6" id="text_section-about">
+                    <h2>{{ about.title|safe }}</h2>
+                    <h3>{{ about.subtitle_normal }}
+                        <span style="color:rgb(255, 100, 120);font-weight:bold;">{{ about.subtitle_styled }}</span>
+                    </h3>
+                    <div class="text-about">{{ about.content|safe }}</div>
+                    <div>
+                        <ul class="about-social list-inline">
+                            {% for item in social_list %}
+                                {% if item.about_include %}
+                                    <li class="list-inline-item">
+                                        <a href="{{ item.link }}" target="_blank"><i class="{{ item.logo }}"></i></a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="bg-dark" id="skills">
+        <div class="container">
+            <div class="page_head">
+                <h2>Professional <span style="font-weight: bold;">Skills</span></h2>
+                <p style="opacity: 60%; padding-top: 10px; line-height: 25px;">
+                    Various skills which I acquired as a part of the academics<br> and self interest.
+                </p>
+            </div>
+            <div class="row">
+                {% for skill_category in skill_categories %}
+                    <div class="skill-sec">
+                    <div class="skill-box-icon"><i class="{{ skill_category.logo }}"></i></div>
+                    <div class="row display-flex">
+                        {% for skill in skill_category.skill_set.all %}
+                            <div class="col-md-3 col-sm-6">
+                                <div class="skills-box">
+                                    <h3>{{ skill.name }}</h3>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: {{ skill.progress }}%;"></div>
+                                    </div>
+                                    <p>{{ skill.description }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="page_bottom"></div>
+        </div>
+    </section>
+
+    <!-- Training -->
+    <section class="bg-gray" id="training">
+        <div class="container">
+            <div class="page_head">
+                <h2 style="font-weight: bold;">Training</h2>
+                <p style="opacity: 60%; padding-top: 10px; line-height: 25px; padding-bottom: 25px;">
+                    Experience gained from working in different institutions.
+                </p>
+            </div>
+            <div id="training_carousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for items in training_list %}
+                        {% if forloop.counter == 1 %}
+                            <li data-target="#training_carousel" data-slide-to="0" class="active"></li>
+                        {% else %}
+                            <li data-target="#training_carousel" data-slide-to="{{ forloop.counter|add:'-1' }}"></li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% for item in training_list %}
+                        {% if forloop.counter == 1 %}
+                            <div class="item active">
+                        {% else %}
+                            <div class="item">
+                        {% endif %}
+                                <div class="slide{{ forloop.counter }}"></div>
+                                <div class="carousel-caption">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="{{ item.logo_image.url }}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h2>{{ item.name }}
+                                                <span style="font-weight: normal; font-size:80%;">{{ item.location }}</span>
+                                            </h2>
+                                            <ul>
+                                                {{ item.description|safe }}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    {% endfor %}
+                </div>
+                <a class="left carousel-control" href="#training_carousel" data-slide="prev">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                <a class="right carousel-control" href="#training_carousel" data-slide="next">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+            <div class="page_bottom"></div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="bg-dark" id="projects">
+        <div class="container">
+            <div class="page_head">
+                <h2 style="font-weight: bold;">Projects</h2>
+                <p style="opacity: 60%; padding-top: 10px; line-height: 25px; padding-bottom: 25px;">
+                    Different projects made as a part of academics and<br> self-interest.
+                </p>
+            </div>
+            <div class="row" id="proj">
+                {% for project in project_list %}
+                    <div class="column">
+                        <a data-toggle="collapse" data-target="#project{{ forloop.counter }}">
+                        <div class="thumbnail">
+                            <img src="{{ project.image.url }}">
+                            <div class="caption">
+                                <h4>{{ project.name }}</h4>
+                                <h5>{{ project.platform }}</h5>
+                                <div id="project{{ forloop.counter }}" class="collapse">
+                                    <a data-toggle="collapse" data-target="#project{{ forloop.counter }}">Hide...</a>
+                                    <ul>
+                                        {{ project.description|safe }}
+                                    </ul>
+                                    {% if project.button_link %}
+                                        <button type="button" class="btn">
+                                            <a href="{{ project.button_link }}" target="_blank">
+                                                {{ project.button_text }}
+                                            </a>
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="page_bottom"></div>
+        </div>
+    </section>
+
+    <!-- Extra Cirricular -->
+    <section class="bg-gray" id="hobbies">
+        <div class="container">
+            <div class="page_head">
+                <h2 style="font-weight: bold;">Extra Cirriculars</h2>
+                <p style="opacity: 60%; padding-top: 10px; line-height: 25px; padding-bottom: 25px;">
+                    My secondary passions and hobbies including art, craft<br> and music production.
+                </p>
+            </div>
+            <div class="row">
+                <div align="center" id="filter-group">
+                    <button class="btn active filter-button" data-filter="all">ALL</button>
+                    {% for filter in port_filters %}
+                        <button class="btn filter-button" data-filter="{{ filter.name }}">{{ filter.button_name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row" id="gall">
+                {% for port_column in port_columns %}
+                    <div class="column">
+                        {% for item in port_column.port_item_set.all %}
+                            {% if item.position %}
+                                <div class="gallery_item filter {{ item.filter.name }}">
+                                    <img class="link-img" src="{{ item.image.url }}" onclick="openModal();currentSlide({{ item.position }})">
+                                </div>
+                            {% else %}
+                                <div class="gallery_item embed-responsive-item embed-responsive-1by1 filter {{ item.filter.name }}">
+                                    <iframe class="embed-responsive-item" height="250"
+                                        src="{{ item.vid_link }}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="portfolio-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    {% for item in port_items %}
+                        {% if item.position %}
+                            <div class="port-slide">
+                                <img class="mod-img" src="{{ item.image.url }}">
+                                <div class="caption">{{ item.caption }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <a class="prev-sl" onclick="plusSlides(-1)"><i class="fas fa-caret-left"></i></a>
+                <a class="next-sl" onclick="plusSlides(1)"><i class="fas fa-caret-right"></i></a>
+            </div>
+            <div class="page_bottom"></div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="bg-dark" id="contact">
+        <div class="container">
+            <div class="page_head">
+                <h2><span style="font-weight: bold;">Contact</span> Me</h2>
+                <p style="opacity: 60%; padding-top: 10px; line-height: 25px; padding-bottom: 25px;">
+                    Feel free to reach me by the below mentioned methods, or send<br>
+                    me a message by filling out the form below.
+                </p>
+            </div>
+            <div class="row">
+                {% for contact in contacts %}
+                    <div class="col-md-4 contact" align="center">
+                        <i class="{{ contact.logo }}"></i>
+                        <h4>{{ contact.head }}</h4>
+                        <h5>{{ contact.detail|safe }}</h5>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="col-md-12" style="margin-top: 20px;">
+                        <div class="alert" style="background-color: rgb(225, 189, 189);">
+                            <span style="color: rgb(230, 0, 0);">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>{{ error|escape }}</strong>
+                            </span>
+                        </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            {% if messages %}
+                <div class="col-md-12" style="margin-top: 20px;">
+                <div class="alert" style="text-align: center; background-color: rgb(43, 75, 51)">
+                    {% for message in messages %}
+                    <h4 style="color: white; opacity: 90%;">{{ message }}</h4>
+                    {% endfor %}
+                </div>
+                </div>
+            {% endif %}
+            <form id="message" method="post">
+                {% csrf_token %}
+                <div class="col-md-6 form-group">
+                    {{ form.name }}
+                </div>
+                <div class="col-md-6 form-group">
+                    {{ form.email }}
+                </div>
+                <div class="col-md-12 form-group">
+                    {{ form.subject }}
+                </div>
+                <div class="col-md-12 form-group">
+                    {{ form.message }}
+                </div>
+                <div class="col-md-12 send" align="right">
+                    <button class="btn" type="submit">SEND MESSAGE</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- End -->
+    <section class="bg-gray">
+        <div align="center">
+            <ul class="end-social list-inline">
+                {% for social in social_list %}
+                    <li class="list-inline-item">
+                        <a href="{{ social.link }}"><i class="{{ social.logo }}"></i></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="end-space" align="center">Made by Sarthak Singh.<br>2020</div>
+    </section>
+
+    <!-- Page Crawler -->
+    <div>
+        <a id="pg_crwlr" href="#home"><i class="fas fa-angle-up"></i></a>
+    </div>
+
+<script src="{% static 'resume/js/Functionalities.js' %}"></script>
+</body>
+</html>
